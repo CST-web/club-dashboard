@@ -1,9 +1,14 @@
 import { X } from "lucide-react";
 
-export default function GalleryModal({ setShowGalleryModal, newGallery, setNewGallery, setGalleries }) {
+export default function GalleryModal({
+  setShowGalleryModal,
+  newGallery,
+  setNewGallery,
+  setGalleries,
+}) {
   const handleGalleryChange = (e) => {
     const { name, value } = e.target;
-    setNewGallery(prev => ({ ...prev, [name]: value }));
+    setNewGallery((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleAddGallery = async (e) => {
@@ -20,7 +25,7 @@ export default function GalleryModal({ setShowGalleryModal, newGallery, setNewGa
       });
       if (!res.ok) throw new Error("Failed to create gallery");
       const data = await res.json();
-      setGalleries(prev => [...prev, data]);
+      setGalleries((prev) => [...prev, data]);
       setShowGalleryModal(false);
       setNewGallery({
         activity: "Échecs",
@@ -42,7 +47,9 @@ export default function GalleryModal({ setShowGalleryModal, newGallery, setNewGa
         >
           <X size={20} />
         </button>
-        <h2 className="text-2xl font-bold mb-6 border-b border-black pb-2">Create New Gallery</h2>
+        <h2 className="text-2xl font-bold mb-6 border-b border-black pb-2">
+          Create New Gallery
+        </h2>
         <form onSubmit={handleAddGallery} className="space-y-4">
           <div>
             <label className="block text-sm font-semibold">Activity</label>
@@ -55,6 +62,7 @@ export default function GalleryModal({ setShowGalleryModal, newGallery, setNewGa
               <option>Échecs</option>
               <option>Robotique</option>
               <option>Prix du meilleur TIPE</option>
+              <option>Ateliers d'innovation</option>
             </select>
           </div>
           <div>
