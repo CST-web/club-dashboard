@@ -69,6 +69,7 @@ export default function EventModal({ setEvents, setShowModal }) {
                             <option>Échecs</option>
                             <option>Robotique</option>
                             <option>Prix du meilleur TIPE</option>
+                            <option>Ateliers d'innovation</option>
                         </select>
                     </div>
                     <div>
