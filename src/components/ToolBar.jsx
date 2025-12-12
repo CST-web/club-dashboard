@@ -5,6 +5,7 @@ export default function ToolBar({
   setSearchQuery,
   verifiedFilter,
   setVerifiedFilter,
+  download
 }) {
   const inputRef = useRef(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -24,8 +25,8 @@ export default function ToolBar({
     verifiedFilter === undefined
       ? "All Members"
       : verifiedFilter
-      ? "Verified"
-      : "Unverified";
+        ? "Verified"
+        : "Unverified";
 
   return (
     <div className="flex flex-col md:flex-row flex-wrap items-center gap-3 relative">
@@ -81,7 +82,7 @@ export default function ToolBar({
       </div>
 
       {/* Export button */}
-      <button className="w-full md:w-auto flex items-center justify-center gap-2 px-3 py-2 bg-black border border-black rounded-lg hover:bg-black/90 transition cursor-pointer">
+      <button className="w-full md:w-auto flex items-center justify-center gap-2 px-3 py-2 bg-black border border-black rounded-lg hover:bg-black/90 transition cursor-pointer" onClick={download}>
         <Download size={16} className="text-white" />
         <p className="text-white text-sm font-medium">Export</p>
       </button>

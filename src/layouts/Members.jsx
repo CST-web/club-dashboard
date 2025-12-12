@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import ToolBar from "../components/ToolBar";
 import MembersTable from "../components/MembersTable";
+import { downloadJSONAsCSV } from "../utils/JsonToCsv";
 
 export default function Members() {
   const [members, setMembers] = useState([]);
@@ -18,7 +19,7 @@ export default function Members() {
         );
         if (!res.ok) throw new Error("Failed to fetch members");
         const data = await res.json();
-        setMembers(data); 
+        setMembers(data);
       } catch (error) {
         console.error("Error fetching members:", error);
       }
@@ -73,6 +74,8 @@ export default function Members() {
     }
   };
 
+  const download = () => downloadJSONAsCSV(members, "members.csv");
+
   return (
     <div className="flex flex-col gap-6 p-6 bg-white rounded-2xl shadow-sm border border-[#e5e7eb]">
       {/* Header */}
@@ -87,6 +90,7 @@ export default function Members() {
         setSearchQuery={setSearchQuery}
         verifiedFilter={verifiedFilter}
         setVerifiedFilter={setVerifiedFilter}
+        download={download}
       />
       <MembersTable
         members={members.filter((m) => {
