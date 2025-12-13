@@ -58,10 +58,10 @@ export default function EventCard({ event, index, events, setEvents, members }) 
                 <h2 className="text-xl font-semibold mb-1">{event.title}</h2>
                 <span className="text-sm text-gray-600 flex items-center gap-1">
                     <Calendar size={16} />
-                    {new Date(event.date).toLocaleString([], {
+                    {event.date ? new Date(event.date).toLocaleString([], {
                         dateStyle: "short",
                         timeStyle: "short",
-                    })}
+                    }) : "Événement en cours"}
                 </span>
             </div>
 
