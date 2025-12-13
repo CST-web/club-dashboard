@@ -19,14 +19,37 @@ export default function Members({ members, setMembers }) {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`, // if your API requires auth
           },
-        }
+        },
       );
       if (!res.ok) throw new Error("Failed to verify member");
 
       setMembers((prevMembers) =>
         prevMembers.map((member) =>
-          member._id === id ? { ...member, verified: true } : member
-        )
+          member._id === id ? { ...member, verified: true } : member,
+        ),
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const unverifyMember = async (id) => {
+    try {
+      const res = await fetch(
+        `https://club-server-25gd.onrender.com/members/unverify/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // if your API requires auth
+          },
+        },
+      );
+      if (!res.ok) throw new Error("Failed to unverify member");
+      setMembers((prevMembers) =>
+        prevMembers.map((member) =>
+          member._id === id ? { ...member, verified: false } : member,
+        ),
       );
     } catch (err) {
       console.error(err);
@@ -42,13 +65,13 @@ export default function Members({ members, setMembers }) {
           headers: {
             Authorization: `Bearer ${token}`, // if required
           },
-        }
+        },
       );
       if (!res.ok) throw new Error("Failed to remove member");
 
       // remove from local state after successful deletion
       setMembers((prevMembers) =>
-        prevMembers.filter((member) => member._id !== id)
+        prevMembers.filter((member) => member._id !== id),
       );
     } catch (err) {
       console.error(err);
@@ -83,6 +106,7 @@ export default function Members({ members, setMembers }) {
           return matchesSearch && matchesVerified;
         })}
         verifyMember={verifyMember}
+        unverifyMember={unverifyMember}
         removeMember={removeMember}
       />
     </div>
