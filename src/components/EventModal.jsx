@@ -99,7 +99,6 @@ export default function EventModal({ setEvents, setShowModal }) {
                             name="date"
                             value={newEvent.date}
                             onChange={handleChange}
-                            required
                             className="w-full border border-black rounded-md p-2"
                         />
                     </div>
